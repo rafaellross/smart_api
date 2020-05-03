@@ -4,8 +4,8 @@ import * as API from '../../Api'
 import IconButton from '@material-ui/core/IconButton';
 import Block from '@material-ui/icons/Block';
 import Edit from '@material-ui/icons/Edit';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import Switch from '@material-ui/core/Switch';
 export class Users extends Component {
     constructor(props) {
         super(props)
@@ -19,8 +19,17 @@ export class Users extends Component {
                 { title: 'Date Created', field: 'created_at', type: 'date'},
                 {
                     field: 'inactive',
-                    title: 'Inactivate Job',                
-                    render: rowData => <IconButton color="primary" aria-label="delete" component="span" onClick={(e) => console.log(rowData.code)}><Block /></IconButton>
+                    title: 'Active?',                
+                    render: rowData => (
+                        <Switch
+                                checked={rowData.enabled === 1 || rowData.enabled ? true : false}
+                                onChange={() => this.enableDisableUser(rowData.id)}
+                                color="primary"
+                                name="checkedB"
+                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                            />                        
+                    )                    
+                
                 },
     
                 {
@@ -35,7 +44,7 @@ export class Users extends Component {
     
                 
             ],        
-            Users: [
+            data: [
             ]
         }
     
@@ -52,7 +61,32 @@ export class Users extends Component {
     }
 
     componentDidMount() {
-        this.loadData('users')
+        this.loadData('users');
+
+    }
+
+    updateUser(user) {
+        console.log(user);
+        
+        API.update('users', user)
+        .then(
+            this.loadData('users')
+        )
+        
+    }
+
+    enableDisableUser(id) {
+        
+        let users = this.state.data.map((user) => user.id !== id ? user :     
+        Object.assign({}, user, {enabled: !user.enabled}));        
+        this.setState(() => ({
+            data: users            
+        }))                
+        
+        API.update('users', users.filter(user => user.id === id)[0])
+        .then((user) => {
+            console.log(user)
+        })
     }
 
     render() {

@@ -6,6 +6,7 @@ import  Home from './Scenes/Home'
 import Jobs from './Scenes/Jobs';
 import Users from './Scenes/Users';
 import Employees from './Scenes/Employees';
+import Pdf from './Reports/PDF';
 
 
 
@@ -25,7 +26,8 @@ class App extends Component {
             <Route exact path="/" component={Home}/>      
             <Route exact path="/jobs" component={Jobs}/>    
             <Route exact path="/users" component={Users}/>    
-            <Route exact path="/employees" component={Employees}/>                     
+            <Route exact path="/employees" component={Employees}/>    
+            <Route exact path="/pdf" component={Pdf}/>                     
           </div>
         );
       }

@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Block from '@material-ui/icons/Block';
 import Edit from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom'
+import Switch from '@material-ui/core/Switch';
 
 export class Employees extends Component {
     constructor(props) {
@@ -31,11 +32,18 @@ export class Employees extends Component {
                 { title: 'Apprentice Rollover', field: 'anniversary_dt', type: 'date' },                                                                            
                 {
                     field: 'inactive',
-                    title: 'Inactivate Employee',   
-                    width: 10,             
-                    render: rowData => <IconButton color="primary" aria-label="delete" component="span" onClick={() => this.update(rowData)}><Block /></IconButton>
+                    title: 'Active?',                
+                    render: rowData => (
+                        <Switch
+                                checked={rowData.inactive === 1 || rowData.inactive ? false : true}
+                                onChange={() => this.enableDisableEmployee(rowData.id)}
+                                color="primary"
+                                name="checkedB"
+                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                            />                        
+                    )                    
+                
                 },
-
     
                 {
                     field: 'edit',
@@ -54,6 +62,19 @@ export class Employees extends Component {
         }
     }
     
+    enableDisableEmployee(id) {
+        
+        let employees = this.state.data.map((employee) => employee.id !== id ? employee :     
+        Object.assign({}, employee, {inactive: !employee.inactive}));        
+        this.setState(() => ({
+            data: employees            
+        }))                
+        
+        API.update('employees', employees.filter(employee => employee.id === id)[0])
+        .then((employee) => {
+            console.log(employee)
+        })
+    }
 
 
     getRole(role){
@@ -68,7 +89,7 @@ export class Employees extends Component {
             case 'L':
                 return 'Labourer';                
             default:
-                return 'Default' + role;
+                return '-';
         }
 
     }

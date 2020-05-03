@@ -31,10 +31,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Users  $user
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Users $user)
+    public function show(User $user)
     {
         //
     }
@@ -43,21 +43,29 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Users  $user
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Users $user)
+    public function update(Request $request, User $user)
     {
-        //
+        $request = $request['model'];
+        //dd($request["enabled"]);
+        $user->administrator = is_null($request['administrator']) ? 0 : $request['administrator'];
+        $user->enabled = is_null($request['enabled']) ? 0 : $request['enabled'];
+        $user->tester        = $request["tester"];
+        $user->job_id        = $request["job_id"];
+        $user->save();        
+        
+        return $user;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Users  $user
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Users $user)
+    public function destroy(User $user)
     {
         //
     }

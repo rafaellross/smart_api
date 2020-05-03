@@ -69,7 +69,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        return $request;
     }
 
     /**

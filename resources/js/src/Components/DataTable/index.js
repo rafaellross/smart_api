@@ -53,7 +53,7 @@ class DataTable extends React.Component {
               {
                 icon: 'print',
                 tooltip: 'Print Selecteds',
-                onClick: (event, rowData) => alert("You saved " + rowData.name)
+                onClick: (event, data) => alert("You printed " + data.length)
               }
       
           ]}

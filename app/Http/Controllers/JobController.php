@@ -48,7 +48,16 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+        $request = $request['model'];
+        //dd($request["enabled"]);
+        $job->code             = $request['code'];
+        $job->description      = $request['description'];
+        $job->address          = $request["address"];
+        $job->phone            = $request["phone"];
+        $job->inactive         = $request["inactive"];
+
+        $job->save();                
+        return $job;        
     }
 
     /**

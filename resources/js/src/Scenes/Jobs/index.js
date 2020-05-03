@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Block from '@material-ui/icons/Block';
 import Edit from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom'
+import Switch from '@material-ui/core/Switch';
 
 export class Jobs extends Component {
     constructor(props) {
@@ -19,8 +20,16 @@ export class Jobs extends Component {
                 { title: 'Address', field: 'address'},
                 {
                     field: 'inactive',
-                    title: 'Inactivate Job',                
-                    render: rowData => <IconButton color="primary" aria-label="delete" component="span" onClick={(e) => console.log(rowData.code)}><Block /></IconButton>
+                    title: 'Active Job?',                
+                    render: rowData => (
+                            <Switch
+                                checked={rowData.inactive === 1 || rowData.inactive ? false : true}
+                                onChange={() => this.enableDisableJob(rowData.id)}
+                                color="primary"
+                                    name="checkedB"
+                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                />                        
+                    )                    
                 },
     
                 {
@@ -50,6 +59,21 @@ export class Jobs extends Component {
           }))                    
         })    
     }
+
+    enableDisableJob(id) {
+        
+        let jobs = this.state.data.map((job) => job.id !== id ? job :     
+        Object.assign({}, job, {inactive: !job.inactive}));        
+        this.setState(() => ({
+            data: jobs            
+        }))                
+        
+        API.update('jobs', jobs.filter(job => job.id === id)[0])
+        .then((job) => {
+            console.log(job)
+        })
+    }
+
 
     componentDidMount() {
         this.loadData('jobs')
