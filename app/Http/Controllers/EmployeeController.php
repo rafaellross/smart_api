@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Employee;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -21,10 +22,14 @@ class EmployeeController extends Controller
                         emp.name,
                         emp.phone,
                         emp.dob,
-                        jobs.code as job_id,
+                        jobs.code as job_code,
                         emp.location,
                         emp.inactive,
                         emp.anniversary_dt,
+                        emp.company,
+                        emp.bonus,
+                        emp.bonus_type,
+                        emp.car_allowance,
                         emp.apprentice_year,
                         CAST(emp.rdo_bal AS DECIMAL(12,2)) as rdo_bal,
                         CAST(emp.pld AS DECIMAL(12,2)) as pld,
@@ -35,7 +40,7 @@ class EmployeeController extends Controller
                         from employees emp
                         left join jobs
                         on emp.job_id = jobs.id"));        
-        return Employee::all()->toJson();
+        return $employees;
     }
 
     /**
@@ -57,7 +62,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return $employee;
     }
 
     /**
@@ -69,7 +74,36 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        return $request;
+        
+        $request = $request['model'];
+        
+        
+        $employee->name = $request['name'];
+        $employee->phone = $request['phone'];
+        $employee->bonus = $request['bonus'];
+        $employee->car_allowance = $request['car_allowance'];
+        $employee->pld = $request['pld'];
+        $employee->rdo_bal = $request['rdo_bal'];
+        $employee->anl = $request['anl'];
+        $employee->dob = $request['dob'];
+
+        $employee->anniversary_dt = is_null($request['anniversary_dt']) ? null : $request['anniversary_dt'];
+
+        $employee->apprentice_year = $request['apprentice_year'];
+
+        $employee->location = $request['location'];
+
+        $employee->inactive = $request['inactive'];
+        $employee->company = $request['company'];
+        $employee->rdo = false;
+        $employee->travel = false;
+        $employee->site_allow = false;
+        $employee->entitled_anl = false;
+        $employee->entitled_pld = false;
+        $employee->bonus_type = $request['bonus_type'];
+
+        $employee->save();        
+        return 200;
     }
 
     /**

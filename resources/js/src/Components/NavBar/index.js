@@ -25,6 +25,8 @@ import People from '@material-ui/icons/People';
 import AccountTree from '@material-ui/icons/AccountTree';
 import Settings from '@material-ui/icons/Settings';
 import Assignment from '@material-ui/icons/Assignment';
+import HowToReg from '@material-ui/icons/HowToReg';
+
 
 class NavBar extends Component {
 
@@ -51,6 +53,12 @@ class NavBar extends Component {
                 path: "/jobs",
                 icon: <AccountTree /> 
               },
+              {
+                title: "Employees",
+                path: "/employees",
+                icon: <HowToReg /> 
+              },
+
               {
                 title: "Settings",
                 path: "/settings",

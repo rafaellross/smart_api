@@ -1,5 +1,5 @@
 
-const api = "api"
+const api = "/api"
 
 
 // Generate a unique token for storing your bookshelf data on the backend server.
@@ -12,8 +12,8 @@ const headers = {
   'Authorization': token
 }
 
-export const get = (qa_Id) =>
-  fetch(`${api}/qa_users/${qa_Id}`, { headers })
+export const get = (table, id) =>
+  fetch(`${api}/${table}/${id}`, { headers })
     .then(res => res.json())
     .then(data => data)
 

@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{path?}', 'index');
 
-Route::get('/', function () {
-    //return view('welcome');
-});
+
+
+
+
+Route::get('{any}', function () {
+    return view('index'); // or wherever your React app is bootstrapped.
+})->where('any', '.*');

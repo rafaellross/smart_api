@@ -31,12 +31,7 @@ class DataTable extends React.Component {
             Toolbar: props => (
               <div>
                 <MTableToolbar {...props} />
-                <div style={{padding: '0px 10px'}}>
-                <Fab color="secondary" aria-label="add">
-                  <AddIcon />
-                </Fab>                  
-                </div>
-
+                {this.props.toolBar}
               </div>
             ),
           }}
