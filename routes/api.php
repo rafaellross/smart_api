@@ -22,3 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('jobs', 'JobController');
 Route::resource('employees', 'EmployeeController');
 Route::resource('users', 'UserController');
+
+
+Route::post('employees/search', function () {
+    return 'search';
+});

@@ -51,7 +51,36 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                
+        //dd($request);
+        $employee = new Employee();
+        $employee->name = $request->input('name');
+        $employee->phone = $request->input('phone');
+        $employee->bonus = $request->input('bonus');
+        $employee->car_allowance = $request->input('car_allowance');
+        $employee->pld = $request->input('pld');
+        $employee->rdo_bal = $request->input('rdo_bal');
+        $employee->anl = $request->input('anl');
+        $employee->dob = $request->input('dob');
+
+        $employee->anniversary_dt = is_null($request->input('anniversary_dt')) ? null : $request->input('anniversary_dt');
+
+        $employee->apprentice_year = $request->input('apprentice_year');
+
+        $employee->location = $request->input('location');
+
+        $employee->inactive = is_null($request->input('inactive')) ? 0 : $request->input('inactive');
+        $employee->company = $request->input('company');
+        $employee->rdo = false;
+        $employee->travel = false;
+        $employee->site_allow = false;
+        $employee->entitled_anl = false;
+        $employee->entitled_pld = false;
+        $employee->bonus_type = $request->input('bonus_type');
+
+        $employee->save();        
+        return 200;
+        
     }
 
     /**
@@ -74,33 +103,30 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        
-        $request = $request['model'];
-        
-        
-        $employee->name = $request['name'];
-        $employee->phone = $request['phone'];
-        $employee->bonus = $request['bonus'];
-        $employee->car_allowance = $request['car_allowance'];
-        $employee->pld = $request['pld'];
-        $employee->rdo_bal = $request['rdo_bal'];
-        $employee->anl = $request['anl'];
-        $employee->dob = $request['dob'];
+                             
+        $employee->name = $request->input('name');
+        $employee->phone = $request->input('phone');
+        $employee->bonus = $request->input('bonus');
+        $employee->car_allowance = $request->input('car_allowance');
+        $employee->pld = $request->input('pld');
+        $employee->rdo_bal = $request->input('rdo_bal');
+        $employee->anl = $request->input('anl');
+        $employee->dob = $request->input('dob');
 
-        $employee->anniversary_dt = is_null($request['anniversary_dt']) ? null : $request['anniversary_dt'];
+        $employee->anniversary_dt = is_null($request->input('anniversary_dt')) ? null : $request->input('anniversary_dt');
 
-        $employee->apprentice_year = $request['apprentice_year'];
+        $employee->apprentice_year = $request->input('apprentice_year');
 
-        $employee->location = $request['location'];
+        $employee->location = $request->input('location');
 
-        $employee->inactive = $request['inactive'];
-        $employee->company = $request['company'];
+        $employee->inactive = $request->input('inactive');
+        $employee->company = $request->input('company');
         $employee->rdo = false;
         $employee->travel = false;
         $employee->site_allow = false;
         $employee->entitled_anl = false;
         $employee->entitled_pld = false;
-        $employee->bonus_type = $request['bonus_type'];
+        $employee->bonus_type = $request->input('bonus_type');
 
         $employee->save();        
         return 200;

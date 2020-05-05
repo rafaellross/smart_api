@@ -2,19 +2,17 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import MaterialTable, {MTableToolbar} from 'material-table'
 
-import * as API from '../../Api';
-import { Button } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import Chip from '@material-ui/core/Chip';
+
+
+import Divider from '@material-ui/core/Divider';
 
 class DataTable extends React.Component {
 
     render() {
       return (
-        <MaterialTable 
+        <div>
+          
+          <MaterialTable 
           style={this.props.style}
           title={this.props.title}
           columns={this.props.columns}
@@ -29,8 +27,11 @@ class DataTable extends React.Component {
 
           components={{
             Toolbar: props => (
-              <div>
+              
+              <div>    
+                            
                 <MTableToolbar {...props} />
+                <Divider variant="middle" style={{marginBottom: 10}}/>
                 {this.props.toolBar}
               </div>
             ),
@@ -52,7 +53,9 @@ class DataTable extends React.Component {
               }
       
           ]}
-        />
+        />          
+        </div>
+
       )
     }
   }

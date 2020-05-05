@@ -7,8 +7,10 @@ import Jobs from './Scenes/Jobs';
 import Users from './Scenes/Users';
 import Employees from './Scenes/Employees';
 import EditEmployee from './Scenes/Employees/edit';
-import Employee from './Components/Employee';
+import AddEmployee from './Scenes/Employees/add';
+
 import Pdf from './Reports/PDF';
+import ListEmployees from './Reports/Employees/list';
 
 
 
@@ -30,7 +32,11 @@ class App extends Component {
             <Route exact path="/jobs" component={Jobs}/>    
             <Route exact path="/users" component={Users}/>    
             <Route exact path="/employees" component={Employees}/>    
-            <Route path="/employee/:id" component={EditEmployee}/>   
+            <Route exact path="/employees/add" component={AddEmployee}/>   
+            <Route exact path="/employees/:id" component={EditEmployee}/>   
+
+            <Route exact path="/reports/employees" component={ListEmployees}/>   
+
             <Route exact path="/pdf" component={Pdf}/>                     
           </div>
         );

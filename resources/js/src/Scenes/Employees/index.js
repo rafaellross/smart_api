@@ -20,6 +20,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+
+
+
 
 function dialogDisableEmployee(id) {
     
@@ -72,7 +76,7 @@ export class Employees extends Component {
                     export: false,
                     render: rowData => (
                         <div>
-                            <Link to={`/employee/${rowData.id}`}><Edit /></Link>                        
+                            <Link to={`/employees/${rowData.id}`}><Edit /></Link>                        
                         </div>
                         )
                 }            
@@ -191,7 +195,10 @@ export class Employees extends Component {
 
     render() {
         
-        
+        const buttons = <ButtonGroup aria-label="outlined primary button group" style={{minWidth: 200+'px', marginLeft: 10+'px'}}>
+                            <Button variant="contained" color="primary" style={{width: '100%', padding: '10px'}} component={Link} to={'/employees/add '}>Add</Button>                                                
+                        </ButtonGroup>
+
         const showInactive = <FormControlLabel value="inactives" control={<Switch checked={this.state.showInactive} onChange={(e) => this.toggleInactives(e)} color="primary" name="checkedB" inputProps={{ 'aria-label': 'primary checkbox' }}/>} label="Show Inactives" labelPlacement="bottom" />;
         const selectCompany =     <FormControl style={{width: 200}} >
                                         <InputLabel id="demo-simple-select-label">Select Company</InputLabel>
@@ -207,7 +214,7 @@ export class Employees extends Component {
                                         </Select>
                                     </FormControl>
         
-        const toolBar = <div>{showInactive}{selectCompany}</div>
+        const toolBar = <div>{buttons}{showInactive}{selectCompany}</div>
 
         const dialog = 
             
