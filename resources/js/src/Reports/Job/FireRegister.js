@@ -16,14 +16,6 @@ const styles = StyleSheet.create({
 });
 
 
-let penetrations = [];
-let isLoading = true;
-
-API.getAll('fire_identification', 106)
-.then((penetrations) => {            
-    penetrations = penetrations
-    isLoading = false
-})    
 
 //Creates style for report's header
 
@@ -102,8 +94,6 @@ const projects = {
 
 
 
-
-
 export class FireRegister extends Component {
 
     constructor(props) {
@@ -111,7 +101,7 @@ export class FireRegister extends Component {
     
         this.state = {
             project : {
-                name: '608 Tonkin St Cronulla (Richard Crooks)',
+                name: '',
                 date: new Date().toLocaleDateString()
           },
 
@@ -122,13 +112,17 @@ export class FireRegister extends Component {
     }
 
     componentDidMount() {
-        API.get('fire_identification', 106)
-        .then((penetrations) => {            
+        API.getAll('fire_identification', this.props.match.params.id)
+        .then((penetrations) => {          
             this.setState(() => ({
-               penetrations: penetrations,
-               isLoading: true
-            }))                    
-        })    
+                penetrations: penetrations,
+                isLoading: false,
+                project: {
+                    name: penetrations[0].description,
+                    date: new Date().toLocaleDateString()
+                }    
+            }))  
+        })           
     
     }
     
@@ -137,7 +131,7 @@ export class FireRegister extends Component {
 
     render() {
         const project = this.state.project
-        if (!isLoading) {
+        if (!this.state.isLoading) {
 
         
         return (
@@ -194,7 +188,7 @@ export class FireRegister extends Component {
                                 <DataTableCell getContent={(r) => <Image style={stylesTable.photo} src={r.fire_photo}/>}/>
                                 <DataTableCell getContent={(r) => r.fire_resist_level} style={stylesTable.cell}/>
                                 <DataTableCell getContent={(r) => r.install_by} style={stylesTable.cell}/>
-                                <DataTableCell getContent={(r) => r.install_dt} style={stylesTable.cell}/>
+                                <DataTableCell getContent={(r) => r.formated_date} style={stylesTable.cell}/>
                                 <DataTableCell getContent={(r) => r.manufacturer} style={stylesTable.cell}/>                                
                             </TableBody>
                         </Table>                

@@ -104,7 +104,7 @@ class Employee extends Component {
             API.save('employees', state)
             .then((employee) => {            
                 console.log(employee)
-                //this.props.history.goBack
+                this.props.history.goBack()
             })
             
     }

@@ -1,3 +1,5 @@
+import Loader from 'react-loader-spinner'
+import React from 'react';
 
 const api = "/api"
 
@@ -14,13 +16,14 @@ const headers = {
 
 export const get = (table, id) =>
   fetch(`${api}/${table}/${id}`, { headers })
+
     .then(res => res.json())
     .then(data => data)
 
 
 
 export const getAll = (table, query) =>
-  fetch(`${api}/${table}/${query}`, { headers })
+  fetch(`${api}/${table}${query ? `/${query}` : ''}`, { headers })
     .then(res => res.json())
     .then(data => data)
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\FireIdentification;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class FireIdentificationController extends Controller
 {
@@ -14,7 +16,19 @@ class FireIdentificationController extends Controller
      */
     public function index($job)
     {
-        return FireIdentification::where('job_id', $job)->take(30)->get();
+        
+
+       $fire =  DB::select(DB::raw(
+            "select jobs.description, date_format(fire_identifications.install_dt, '%d/%m/%Y') as formated_date,  fire_identifications.*
+            from fire_identifications
+            inner join jobs
+            on jobs.id = fire_identifications.job_id
+            where fire_identifications.fire_photo is not null and fire_identifications.job_id = $job
+           order by fire_seal_ref
+             "));
+          
+             return $fire;
+
     }
 
     /**

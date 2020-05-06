@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import DataTable from '../../Components/DataTable'
 import * as API from '../../Api'
-import IconButton from '@material-ui/core/IconButton';
-import Block from '@material-ui/icons/Block';
+import Fireplace from '@material-ui/icons/Fireplace';
+
 import Edit from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom'
 import Switch from '@material-ui/core/Switch';
@@ -40,7 +40,17 @@ export class Jobs extends Component {
                             <Link to={`/jobs/edit/${rowData.id}`}><Edit /></Link>                        
                         </div>
                         )
-                }            
+                } ,
+                {
+                    field: 'fire_register',
+                    title: 'Fire Register',
+                    render: rowData => (
+                        <div>
+                            <Link to={`/reports/jobs/fire/${rowData.id}`}><Fireplace /></Link>                        
+                        </div>
+                        )
+                } ,
+                           
     
                 
             ],        
