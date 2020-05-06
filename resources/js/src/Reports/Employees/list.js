@@ -3136,7 +3136,7 @@ const MyDocument = () => (
         <Page size="A4" style={styles.page} debug={debug}>
             <View>
                 <Text style={{ textAlign: 'right', fontStyle: 'italic', fontSize: 10 }} fixed>Printed: {dateTime.toLocaleDateString()}</Text>
-                <Image style={{ position: 'absolute', right: 0, top: 10, width: '100px' }} src="/img/logo.jpg" fixed/>
+                <Image style={{ position: 'absolute', right: 0, top: 5, width: '100px' }} src="/img/logo.jpg" />
                 <View style={{ flex: 1 }}>
                     <Text style={{ textAlign: 'center', fontStyle: 'italic', fontSize: 15 }}>LIST OF EMPLOYEES</Text>
                     

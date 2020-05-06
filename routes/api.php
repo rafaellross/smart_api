@@ -23,6 +23,11 @@ Route::resource('jobs', 'JobController');
 Route::resource('employees', 'EmployeeController');
 Route::resource('users', 'UserController');
 
+Route::resource('users', 'UserController');
+
+Route::get('fire_identification/{id}', 'FireIdentificationController@index');
+
+
 
 Route::post('employees/search', function () {
     return 'search';

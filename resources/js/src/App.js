@@ -11,6 +11,7 @@ import AddEmployee from './Scenes/Employees/add';
 
 import Pdf from './Reports/PDF';
 import ListEmployees from './Reports/Employees/list';
+import FireRegister from './Reports/Job/FireRegister';
 
 
 
@@ -36,6 +37,7 @@ class App extends Component {
             <Route exact path="/employees/:id" component={EditEmployee}/>   
 
             <Route exact path="/reports/employees" component={ListEmployees}/>   
+            <Route exact path="/reports/jobs/fire" component={FireRegister}/>   
 
             <Route exact path="/pdf" component={Pdf}/>                     
           </div>

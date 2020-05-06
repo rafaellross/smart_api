@@ -19,8 +19,8 @@ export const get = (table, id) =>
 
 
 
-export const getAll = (query) =>
-  fetch(`${api}/${query}`, { headers })
+export const getAll = (table, query) =>
+  fetch(`${api}/${table}/${query}`, { headers })
     .then(res => res.json())
     .then(data => data)
 
